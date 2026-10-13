@@ -1,1 +1,1 @@
-// Scripts for Gary Crosby's DTC Lookup web app 
+// Scripts for Gary Crosby's ISS Locator web app 
