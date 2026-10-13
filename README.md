@@ -2,7 +2,7 @@
 
 ## Background
 
-Gary Crosby's DTC Lookup web app created to fulfill the requirements of an assignment for SHU's MSc Computer Science 'Web Technologies' module.
+Gary Crosby's International Space Station (ISS) Locator web app created to fulfill the requirements of an assignment for SHU's MSc Computer Science 'Web Technologies' module.
 
 ## Install
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vulputate nulla odio, eget venenatis magna facilisis id. Nulla gravida ullamcorper magna, sed euismod ipsum sagittis quis. Etiam egestas lobortis convallis. 
