@@ -1,14 +1,16 @@
 /* Scripts for Gary Crosby's ISS Locator web app */
 
-/* TODO: Get current position of ISS in latitude and longitude
-    - Use NASA API? */
+// Initialize the app by calling the function to get the current position of the ISS
+getISSPosition();
+
+// Get the current position of the ISS from the Open Notify API
+// TODO: Add error handling via an async function, try/catch block, and await
 function getISSPosition() {
   fetch("http://api.open-notify.org/iss-now.json")
     .then((response) => response.json())
     .then((data) => {
       const lat = data.iss_position.latitude;
       const long = data.iss_position.longitude;
-      // Display the latitude and longitude in the console
       console.log(`ISS Position - Latitude: ${lat}, Longitude: ${long}`);
     });
 }
