@@ -1,4 +1,4 @@
-# DTC Lookup web app
+# International Space Station (ISS) Locator web app
 
 ## Background
 
