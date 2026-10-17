@@ -17,6 +17,7 @@ class MyGlobe {
           color: "red",
         },
       ])
+      .pointColor("color")
       .pointAltitude(0.02)
       .pointRadius(0.5);
 
@@ -41,6 +42,9 @@ class MyGlobe {
 // createGlobe(issLat, issLng);
 
 const myGlobe = new MyGlobe("globe", 52.15, -106.65);
+setTimeout(() => {
+  myGlobe.updatePosition(12.15, -80.65);
+}, 1000);
 
 // Get the current position of the ISS from the Open Notify API
 // TODO: Add error handling via an async function, try/catch block, and await
