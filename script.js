@@ -1,7 +1,11 @@
-/* Scripts for Gary Crosby's ISS Locator web app */
+/* Script for Gary Crosby's ISS Locator web app */
 
-// Put classes first becaue they are not hoisted
+
 // Class to represent the globe and its properties
+//
+// TODO: 
+//  - Use a different technique to mark ISS positon so updatePosition() is smoother
+//
 class MyGlobe {
   constructor(containerId, lat, lng) {
     this.globe = Globe()(document.getElementById(containerId))
@@ -29,6 +33,7 @@ class MyGlobe {
     this.globe.controls().enableRotate = false;
   }
 
+  // Method to update the position of the ISS on the globe
   updatePosition(lat, lng) {
     this.globe.pointsData([{ lat, lng, size: 1, color: "red" }]);
     this.globe.pointOfView({ lat, lng }, 1000);
@@ -41,10 +46,7 @@ class MyGlobe {
 // console.log(result);
 // createGlobe(issLat, issLng);
 
-const myGlobe = new MyGlobe("globe", 52.15, -106.65);
-setTimeout(() => {
-  myGlobe.updatePosition(12.15, -80.65);
-}, 1000);
+
 
 // Get the current position of the ISS from the Open Notify API
 // TODO: Add error handling via an async function, try/catch block, and await
@@ -61,24 +63,20 @@ function getISSPosition() {
     });
 }
 
-//
 
-function createGlobe(issLat, issLng) {
-  const globe = Globe()(document.getElementById("globe"))
-    .globeImageUrl("//unpkg.com/three-globe/example/img/earth-blue-marble.jpg")
-    .showGraticules(true)
-    .pointsData([
-      {
-        lat: issLat,
-        lng: issLng,
-        size: 1,
-        color: "red",
-      },
-    ]);
-}
-
-/* TODO: Rotate the globe, place on it a marker for the ISS on the globe,
-    and (option) highlight the area of earth visible from the ISS */
 
 /* TODO: (not mandatory) Use latitude and longitude to get name of country, ocean, or whatever at that location. 
     - Need to find an API that does this for free */
+
+
+
+
+// Create a new instance of the MyGlobe class with the initial position of the ISS
+const myGlobe = new MyGlobe("globe", 52.15, -106.65);
+
+// Test to see if the updatePosition() method works. It does, but it is not smooth. Need to find a better way to update the position of the ISS on the globe.
+// setTimeout(() => {
+//   myGlobe.updatePosition(12.15, -80.65);
+// }, 2000);
+
+
