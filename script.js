@@ -25,25 +25,21 @@ class MyGlobe {
 
   // Method to move globe so lat-long is centered and add ISS location marker
   updatePosition(lat, lng) {
-    this.globe.pointsData([{ lat, lng, size: 3, color: "red" }]);
+    this.globe.pointsData([{ lat, lng, size: 1, color: "red" }]);
     this.globe.pointColor("color");
     this.globe.pointAltitude(0.02);
-    this.globe.pointRadius(0.5);
+    this.globe.pointRadius("size");
     this.globe.pointOfView({ lat, lng }, 1000);
   }
 }
 
 // Async Function to fetch ISS position from WhereTheISS.at API
-// Returns a promise that resolves to an object with latitude and longitude properties
-// Note that this API is limited to 1 request per second to a max of 1000 requests per day.
-// If you exceed this limit, you will get a 429 error code.
-// And sometimes is takes >5 seconds to return data
+// Returns a promise that resolves to an object with latitude and longitude properties.
 async function updateISSPosition() {
   const apiURL = "https://api.wheretheiss.at/v1/satellites/25544"; // 25544 is the NORAD ID for the ISS
 
   try {
     const response = await fetch(apiURL);
-
     // Check if the response is OK
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -59,6 +55,7 @@ async function updateISSPosition() {
     myGlobe.updatePosition(latitude, longitude); // Update globe with new ISS position
     return data; // Return full data even though we don't need it all
   } catch (error) {
+    // TODO: Need to show a message to the user
     console.error(`Failed to fetch ISS position: ${error.message}`);
   }
 }
@@ -77,11 +74,17 @@ setInterval(updateISSPosition, 5000);
 /*  Notes:
 
     I originally got the ISS location from http://api.open-notify.org/iss-now.json 
-    but its is http not https so it will cause "mixed content" issues. I found
-    a free API that returns the ISS location plus a few other properties such as velocity:
+    but its is http not https so it will cause "mixed content" issues.
     
-    https://api.wheretheiss.at/v1/satellites/25544. Sample JSON return:
+    I found a free API https://api.wheretheiss.at/v1/satellites/25544 
+    that returns the ISS location plus a few other properties such as velocity
+
+    WhereTheISS.at API is limited to 1 request per second to a max of 1000 requests per day.
+    If you exceed this limit, you will get a 429 error code.
+    It may take up to 5 seconds to fulfill a request.
     
+     Sample JSON response from WhereTheISS.at API:
+
         {
             "name": "iss",
             "id": 25544,
