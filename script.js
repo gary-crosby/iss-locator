@@ -1,6 +1,9 @@
 /* Script for Gary Crosby's ISS Locator web app */
 
 
+// Classes and Global Variables first
+
+
 // Class to represent the globe and its properties
 //
 // TODO: 
@@ -70,9 +73,10 @@ function getISSPosition() {
 
 
 
-
 // Create a new instance of the MyGlobe class with the initial position of the ISS
 const myGlobe = new MyGlobe("globe", 52.15, -106.65);
+
+// Get the position of ISS
 
 // Test to see if the updatePosition() method works. It does, but it is not smooth. Need to find a better way to update the position of the ISS on the globe.
 // setTimeout(() => {
