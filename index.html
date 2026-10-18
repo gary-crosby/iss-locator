@@ -13,9 +13,9 @@
     <!-- Link to globe.gl library -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/6/w3.css" />
     <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
-    <!-- LInk to styles and scripts -->
+    <!-- Link to styles and scripts -->
     <link rel="stylesheet" href="style.css" />
-
+    <!-- Link to main script but don't execute it until the page is loaded completely -->
     <script src="script.js" defer></script>
   </head>
 
@@ -29,18 +29,28 @@
 
       <main>
         <h1>International Space Station Locator</h1>
-        <p>
-          This web app displays the current position of the International Space
-          Station (ISS) relative to the earth. The ISS's position is
-          automagically updated every 10 seconds.
-        </p>
         <div id="globe"></div>
+        <table id="iss-info" class="w3-table w3-bordered w3-centered">
+          <tr>
+            <th>Latitude (degrees)</th>
+            <th>Longitude (degrees)</th>
+            <th>Altitude (km)</th>
+            <th>Speed (km/h)</th>
+          </tr>
+          <tr>
+            <td id="iss-lat">Loading...</td>
+            <td id="iss-lng">Loading...</td>
+            <td id="iss-alt">Loading...</td>
+            <td id="iss-speed">Loading...</td>
+          </tr> 
+          </table>
       </main>
 
       <footer>
-        <!-- Not sure if this is needed -->
+        <!-- TODO: Put copyright info here? -->
       </footer>
     </div>
+
   </body>
 
 </html>

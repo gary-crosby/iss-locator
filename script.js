@@ -86,12 +86,11 @@ async function updateISSPosition() {
     const data = await response.json();
     // Extract latitude and longitude
     const { latitude, longitude, altitude, velocity } = data;
-    // TODO: Update the UI with the ISS position data
-    console.log(`Current ISS Position:`);
-    console.log(`Latitude: ${latitude}`);
-    console.log(`Longitude: ${longitude}`);
-    console.log(`Altitude: ${altitude} km`);
-    console.log(`Velocity: ${velocity} km/h`);
+    // Update the UI with the ISS position data
+    document.getElementById("iss-lat").textContent = latitude.toFixed(2);
+    document.getElementById("iss-lng").textContent = longitude.toFixed(2);  
+    document.getElementById("iss-alt").textContent = altitude.toFixed(0);
+    document.getElementById("iss-speed").textContent = velocity.toFixed(0);
     myGlobe.updatePosition(latitude, longitude); // Update globe with new ISS position
     return data; // Return full data even though we don't need it all
   } catch (error) {

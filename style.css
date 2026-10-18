@@ -15,14 +15,16 @@ body, h1, h2, h3, h4, h5, h6, p {
     
 }
 
-p {
+th, td {
     letter-spacing: 0.15em; /* increase spacing between <p> letters even more to improve readability */
 }
 
 
 h1 {
     text-align: center;
+    background-color: #000000;
 }
+
 .w3-container {
   display: flex;
   flex-direction: column;
