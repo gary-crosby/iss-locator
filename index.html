@@ -14,9 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
     <!-- Link to custom styles and scripts -->
     <link rel="stylesheet" href="style.css" />
-    <!-- Link to main script. Must identify it as a module because it includes
-     an import. js module is automatically deferred.-->
-    <script type="module" src="script.js"></script>
+    <!-- Link to main script. Defer running it until the page is loaded.-->
+    <script src="script.js" defer></script>
   </head>
 
   <body>
@@ -28,7 +27,7 @@
       </header>
 
       <main>
-        <h1>International Space Station (ISS) Tracker</h1>
+        <h1 id="main-title">International Space Station (ISS) Tracker</h1>
         <div id="globe"></div>
         <div id="iss-info">
         <table title="Current Position of the ISS">
@@ -61,7 +60,7 @@
 
       <footer>
         <!-- TODO: Put copyright info here? -->
-         <p>About this web app</p>
+         <p id="about">About this web app</p>
       </footer>
     </div>
 

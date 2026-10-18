@@ -1,11 +1,11 @@
 // Script for Gary Crosby's ISS Locator web app
-// See additional notes at the bottom of this file
 
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
+// See additional notes at the bottom of this file
 
 // Set a base altitude for the globe's point of view
 const BASE_ALTITUDE = 2;
-const globalImageTextMap = "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"; // texture map for globe
+// Points to the texture map of the earth used for the globe. This is a free texture map from the three-globe library.
+const globalImageTextMap = "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
 
 // Represents the globe and its properties
 class MyGlobe {
