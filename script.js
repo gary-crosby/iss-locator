@@ -78,7 +78,11 @@ class MyGlobe {
 // We return the full data object for potential future use.
 async function updateISSPosition() {
   const apiURL = "https://api.wheretheiss.at/v1/satellites/25544"; // 25544 is the NORAD ID for the ISS
-
+  let updateText = "Updating..."; 
+  document.getElementById("iss-lat").textContent = updateText;
+  document.getElementById("iss-lng").textContent = updateText;
+  document.getElementById("iss-alt").textContent = updateText;
+  document.getElementById("iss-speed").textContent = updateText;
   try {
     const response = await fetch(apiURL);
     // Check if the response is OK
