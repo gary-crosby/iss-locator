@@ -29,6 +29,7 @@ td {
 h1 {
   font-weight: 600;
   margin: 0em;
+  margin-top: 1em;
   text-align: center;
   background-color: #000000;
 }
@@ -55,7 +56,7 @@ td {
 }
 
 
-.w3-container {
+.container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -87,7 +88,7 @@ td {
   /* removes the inline baseline gap */
 }
 
-.w3-container main {
+.container main {
   flex: 1 1 0;
   min-height: 0;
   min-width: 0;
@@ -96,7 +97,7 @@ td {
 }
 
 footer {
-  text-align: right;
+  text-align: left;
   padding: 1em;
   background-color: #000000;
   color: #ffffff;
@@ -104,7 +105,9 @@ footer {
 
 
 header {
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 1em;
   background-color: #000000;
   color: #ffffff;
@@ -121,53 +124,85 @@ header {
   list-style: none;
 }
 
-.options-menu ul {
+.options-menu ul,
+.menu-panel {
   position: absolute;
-  right: 0;
+  top: 100%;
+  left: 0;
   z-index: 10;
   margin: 0.5em 0 0;
   padding: 0.5em 1em;
-  list-style: none;
-  white-space: nowrap;
   background-color: #1a1a1a;
   border: 1px solid #555555;
   border-radius: 4px;
+}
+
+.options-menu ul {
+  list-style: none;
+  white-space: nowrap;
 }
 
 .options-menu li {
   padding: 0.25em 0;
 }
 
+.options-menu ul {
+  list-style: none;
+  white-space: nowrap;
+}
+
+/* Anchor the About panel to the right edge so it doesn't run off-screen */
+.about-menu .menu-panel {
+  left: auto;
+  right: 0;
+  width: 20em;
+  max-width: 80vw;
+}
+
+.menu-panel p {
+  margin: 0.5em 0;
+}
+
 /* Chnage font sizes for different screen sizes */
 @media (max-width: 480px) {
   h1 {
-    font-size: 1.3em;
+    font-size: 1em;
   }
 
   #iss-info {
+    font-size: 0.8em;
+  }
+
+  .options-menu {
+    font-size: 0.8em;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 800px) {
+  h1 {
+    font-size: 1.8em;
+  }
+
+  #iss-info {
+    font-size: 1.1em;
+  }
+
+  .options-menu {
     font-size: 0.9em;
   }
 
 }
 
-
-@media (min-width: 481px) and (max-width: 800px) {
+@media (min-width: 801px) {
   h1 {
     font-size: 2em;
   }
 
   #iss-info {
-    font-size: 1.2em;
-  }
-}
-
-@media (min-width: 801px) {
-  h1 {
-    font-size: 2.5em;
+    font-size: 1.3em;
   }
 
-  #iss-info {
-    font-size: 1.4em;
+  .options-menu {
+    font-size: 1.0em;
   }
-
 }

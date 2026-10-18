@@ -10,18 +10,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <!-- Link to globe.gl library -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/6/w3.css" />
     <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
     <!-- Link to custom styles and scripts -->
-    <link rel="stylesheet" href="style.css" />
     <!-- Link to main script as amodule because it contains an import. Modules are deferred automatically.-->
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" type="module"></script>
   </head>
 
   <body>
     <!-- I created this International Space Station (ISS) Tracker web app to fulfill the
       requirements of an assignment for SHU's MSc Computer Science 'Web Technologies' module -->
-    <div class="w3-container">
+    <div class="container">
       <header>
         <details class="options-menu">
           <summary>Options</summary>
@@ -29,16 +28,27 @@
             <li><label><input type="checkbox" id="opt-atmo" checked> Atmosphere</label></li>
             <li><label><input type="checkbox" id="opt-graticules" checked> Lat-Long Lines</label></li>
             <li><label><input type="checkbox" id="opt-dets" checked> Details</label></li>
-            <li><label><input type="checkbox" id="opt-title" checked> Title</label></li>
-            <li><label><input type="checkbox" id="opt-auto-update" checked> Auto update (10 S interval)</label></li>
-
+            <li><label><input type="checkbox" id="opt-title" checked> Title text</label></li>
+            <li><label><input type="checkbox" id="opt-auto-update" checked> Auto update (10 Second interval)</label>
+            </li>
           </ul>
         </details>
+        <details class="options-menu about-menu">
+          <summary>About</summary>
+          <div class="menu-panel">
+            <p>This web app shows the current position of the International Space Station (ISS) on a 3D globe.</p>
+            <p>Position data comes from the WhereTheISS.at API and refreshes every 10 seconds. The globe is drawn with
+              globe.gl and three.js.</p>
+            <p>Created by Gary Crosby for the Web Technologies module of the MSc Computer Science at Sheffield Hallam
+              University.</p>
+          </div>
+        </details>
       </header>
-
       <main>
         <h1 id="main-title">International Space Station (ISS) Tracker</h1>
+
         <div id="globe"></div>
+        <div id="update"></div>
         <div id="iss-info">
           <table title="Current Position of the ISS">
             <tr>
@@ -69,7 +79,7 @@
       </main>
 
       <footer>
-        <p id="about">About this web app</p>
+<p>Put some text here???</p>
       </footer>
     </div>
 

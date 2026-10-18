@@ -15,7 +15,7 @@ const globalImageTextMap =
 // file is loaded as a module and the MyGlobe class is not in the global scope. 
 // The event handlers are defined here so they can access the myGlobe instance.
 document.getElementById("opt-atmo").addEventListener("change", () => myGlobe.toggleAtmo());
-document.getElementById("opt-graticules").addEventListener("change", () => myGlobe.toggleGraticales());
+document.getElementById("opt-graticules").addEventListener("change", () => myGlobe.toggleGraticules());
 document.getElementById("opt-dets").addEventListener("change", () => myGlobe.toggleDetails());
 document.getElementById("opt-title").addEventListener("change", () => myGlobe.toggleTitle());
 document.getElementById("opt-auto-update").addEventListener("change", () => myGlobe.toggleAutoUpdate());
@@ -67,7 +67,7 @@ class MyGlobe {
   }
 
   // Turn the graticule on or off
-  toggleGraticales() {
+  toggleGraticules() {
     const currentState = this.globe.showGraticules();
     this.globe.showGraticules(!currentState);
   }
@@ -101,7 +101,13 @@ class MyGlobe {
 
   toggleAutoUpdate() {
     const checkAutoUpdate = document.getElementById("opt-auto-update");     
-
+    if (checkAutoUpdate.checked) {
+      // Start auto-update by calling updateISSPosition every 10 seconds
+      this.autoUpdateInterval = setInterval(updateISSPosition, 10000);
+    } else {
+      // Stop auto-update by clearing the interval
+      clearInterval(this.autoUpdateInterval);
+    }
   
   }
 
