@@ -99,10 +99,25 @@ async function updateISSPosition() {
     );
 
     // Update the UI with the ISS position data
-    document.getElementById("iss-lat").textContent = latitude.toFixed(2) + "°";
-    document.getElementById("iss-lng").textContent = longitude.toFixed(2) + "°";;
-    document.getElementById("iss-alt").textContent = altitude.toFixed(0) + " km";
-    document.getElementById("iss-speed").textContent = velocity.toFixed(0) + " kmh";
+    // For more user-friendly display, format the latitude and longitude with N/S and E/W indicators
+    // instead of using "-" for south and west.
+    let tempText = "";
+    tempText = latitude.toFixed(2) + "°";
+    if (latitude > 0) {
+      tempText += " N";
+    } else if (latitude < 0) {
+      tempText += " S";
+    }
+    document.getElementById("iss-lat").textContent = tempText;
+    tempText = longitude.toFixed(2) + "°";
+    if (longitude > 0) {
+      tempText += " E";
+    } else if (longitude < 0) {
+      tempText += " W";
+    }
+    document.getElementById("iss-lng").textContent = tempText
+    document.getElementById("iss-alt").textContent = altitude.toFixed(1) + " km";
+    document.getElementById("iss-speed").textContent = velocity.toFixed(0) + " km/h";
     myGlobe.updatePosition(latitude, longitude); // Update globe with new ISS position
     return data; // Return full data even though we don't need it all
   } catch (error) {

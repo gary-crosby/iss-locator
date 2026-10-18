@@ -1,5 +1,7 @@
 /* Styles for Gary Crosby's ISS Locator web app */
 
+@import url("https://fonts.googleapis.com/css2?family=Michroma&family=Space+Mono&display=swap");
+
 html,
 body {
   height: 100%;
@@ -17,16 +19,15 @@ h3,
 h4,
 h5,
 h6,
-p {
-  font-family: "Orbitron", Arial, Helvetica, sans-serif;
+p,
+th,
+td {
+  font-family: "Space Grotesk", Helvetica, sans-serif;
   color: #ffffff;
-
 }
 
 th,
 td {
-  /* increase spacing between <p> letters even more to improve readability */
-  letter-spacing: 0.15em;
   padding-top: 0px;
   padding-bottom: 0px;
   margin-top: 0px;
@@ -93,11 +94,11 @@ h1 {
 /* CHnage font sizes for different screen sizes */
 @media (max-width: 480px) {
   h1 {
-    font-size: 1.0em;
+    font-size: 1.3em;
   }
 
   #iss-info {
-    font-size: 0.7em;
+    font-size: 0.9em;
   }
 }
 
@@ -107,7 +108,7 @@ h1 {
   }
 
   #iss-info {
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
 }
 
@@ -117,7 +118,7 @@ h1 {
   }
 
   #iss-info {
-    font-size: 1.3em;
+    font-size: 1.5em;
   }
 
 }
