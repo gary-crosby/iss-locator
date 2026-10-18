@@ -170,50 +170,73 @@ header {
   margin: 0.5em 0;
 }
 
-/* Chnage font sizes for different screen sizes */
+/* Change font sizes for different screen sizes */
 @media (max-width: 480px) {
   h1 {
+    font-size: 1.1em;
+  }
+
+  input[type="checkbox"],
+  input[type="button"],
+  .options-menu {
     font-size: 1em;
   }
 
-  #iss-info,
-  input[type="button"],
-  .options-menu {
-    font-size: 0.7em;
+  .iss-stat,
+  .iss-property {
+    font-size: 0.9em;
+
   }
 
   footer {
-    font-size: 0.5em;
+    font-size: 0.65em;
   }
 
 
 }
 
 @media (min-width: 481px) and (max-width: 800px) {
+
   h1 {
     font-size: 1.8em;
   }
 
-  #iss-info,
+  input[type="checkbox"],
   input[type="button"],
   .options-menu {
-    font-size: 1.25em;
+    font-size: 1.4em;
+
   }
-    footer {
+
+  .iss-stat,
+  .iss-property {
+    font-size: 1.25m;
+
+  }
+
+  footer {
     font-size: 0.9em;
+
   }
 
 }
 
 @media (min-width: 801px) {
+
   h1 {
-    font-size: 2em;
+    font-size: 2.3em;
   }
 
-  #iss-info,
+  input[type="checkbox"],
   input[type="button"],
   .options-menu {
-    font-size: 1.4em;
+    font-size: 1.60em;
+  }
+
+
+  .iss-stat,
+  .iss-property {
+    font-size: 1.35em;
   }
 
   footer {

@@ -48,33 +48,33 @@
         <h1 id="main-title">International Space Station (ISS) Tracker</h1>
 
         <div id="globe"></div>
-        <div id="update">
+        <div id="man-update" style="display:none;">
           <input type="button" id="btn-update" value="Update Now" />
         
         </div>
         <div id="iss-info">
           <table title="Current Position of the ISS">
             <tr>
-              <th colspan="2">Current Position of ISS</th>
+              <th colspan="2" class="iss-property">Current Position of ISS</th>
             </tr>
             <tr>
-              <td>Latitude:&nbsp;</td>
+              <td class="iss-property">Latitude:&nbsp;</td>
               <td class="iss-stat" id="iss-lat">Updating...</td>
             </tr>
             <tr>
-              <td>Longitude:&nbsp;</td>
+              <td class="iss-property">Longitude:&nbsp;</td>
               <td class="iss-stat" id="iss-lng">Updating...</td>
             </tr>
             <tr>
-              <td>Altitude:&nbsp;</td>
+              <td class="iss-property">Altitude:&nbsp;</td>
               <td class="iss-stat" id="iss-alt">Updating...</td>
             </tr>
             <tr>
-              <td>Speed:&nbsp;</td>
+              <td class="iss-property" >Speed:&nbsp;</td>
               <td class="iss-stat" id="iss-speed">Updating...</td>
             </tr>
             <tr>
-              <td>Last updated:&nbsp;</td>
+              <td class="iss-property">Last updated:&nbsp;</td>
               <td class="iss-stat" id="iss-time">Updating...</td>
             </tr>
           </table>

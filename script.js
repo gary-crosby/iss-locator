@@ -12,13 +12,26 @@ const globalImageTextMap =
 
 // Event handlers for UI controls.  Must use event handlers here because
 // index.html cannot call methods of the MyGlobe class directly because this JS
-// file is loaded as a module and the MyGlobe class is not in the global scope. 
+// file is loaded as a module and the MyGlobe class is not in the global scope.
 // The event handlers are defined here so they can access the myGlobe instance.
-document.getElementById("opt-atmo").addEventListener("change", () => myGlobe.toggleAtmo());
-document.getElementById("opt-graticules").addEventListener("change", () => myGlobe.toggleGraticules());
-document.getElementById("opt-dets").addEventListener("change", () => myGlobe.toggleDetails());
-document.getElementById("opt-title").addEventListener("change", () => myGlobe.toggleTitle());
-document.getElementById("opt-auto-update").addEventListener("change", () => myGlobe.toggleAutoUpdate());
+document
+  .getElementById("opt-atmo")
+  .addEventListener("change", () => myGlobe.toggleAtmo());
+document
+  .getElementById("opt-graticules")
+  .addEventListener("change", () => myGlobe.toggleGraticules());
+document
+  .getElementById("opt-dets")
+  .addEventListener("change", () => myGlobe.toggleDetails());
+document
+  .getElementById("opt-title")
+  .addEventListener("change", () => myGlobe.toggleTitle());
+document
+  .getElementById("opt-auto-update")
+  .addEventListener("change", () => myGlobe.toggleAutoUpdate());
+document
+  .getElementById("btn-update")
+  .addEventListener("click", () => myGlobe.updatePosition());
 
 // Represents the globe and its properties
 class MyGlobe {
@@ -78,14 +91,14 @@ class MyGlobe {
     this.globe.showAtmosphere(!currentState);
   }
 
-// Toggle ISS position details on or off.  
+  // Toggle ISS position details on or off.
   toggleDetails() {
     const details = document.getElementById("iss-info");
     if (details.style.display === "none") {
       details.style.display = "block";
     } else {
       details.style.display = "none";
-    }   
+    }
   }
 
   // Toggle page title (i.e., Heading 1)s on or off.  This is a placeholder for future functionality.
@@ -96,21 +109,22 @@ class MyGlobe {
       pageTitle.style.display = "block";
     } else {
       pageTitle.style.display = "none";
-    }   
+    }
   }
 
   toggleAutoUpdate() {
-    const checkAutoUpdate = document.getElementById("opt-auto-update");     
+    const checkAutoUpdate = document.getElementById("opt-auto-update");
     if (checkAutoUpdate.checked) {
       // Start auto-update by calling updateISSPosition every 10 seconds
       this.autoUpdateInterval = setInterval(updateISSPosition, 10000);
+      document.getElementById("man-update").style.display = "none";
     } else {
       // Stop auto-update by clearing the interval
       clearInterval(this.autoUpdateInterval);
+      document.getElementById("iss-time").textContent = "Auto-update off";
+      document.getElementById("man-update").style.display = "block";
     }
-  
   }
-
 }
 
 // Async Function to fetch ISS position from WhereTheISS.at API
@@ -180,7 +194,7 @@ const myGlobe = new MyGlobe("globe", 0, 0);
 // Set initial position of the ISS
 updateISSPosition();
 // Update the ISS position and rotate the globe every 10 seconds
-setInterval(updateISSPosition, 10000);
+myGlobe.toggleAutoUpdate();
 
 /*  Notes:
 
