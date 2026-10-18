@@ -21,9 +21,16 @@ h5,
 h6,
 p,
 th,
-td {
+td,
+.options-menu,
+footer {
   font-family: "Space Grotesk", Helvetica, sans-serif;
   color: #ffffff;
+}
+
+input[type="checkbox"],
+input[type="button"] {
+  font-family: "Space Grotesk", Helvetica, sans-serif;
 }
 
 h1 {
@@ -169,13 +176,17 @@ header {
     font-size: 1em;
   }
 
-  #iss-info {
-    font-size: 0.8em;
+  #iss-info,
+  input[type="button"],
+  .options-menu {
+    font-size: 0.7em;
   }
 
-  .options-menu {
-    font-size: 0.8em;
+  footer {
+    font-size: 0.5em;
   }
+
+
 }
 
 @media (min-width: 481px) and (max-width: 800px) {
@@ -183,11 +194,12 @@ header {
     font-size: 1.8em;
   }
 
-  #iss-info {
-    font-size: 1.1em;
-  }
-
+  #iss-info,
+  input[type="button"],
   .options-menu {
+    font-size: 1.25em;
+  }
+    footer {
     font-size: 0.9em;
   }
 
@@ -198,11 +210,14 @@ header {
     font-size: 2em;
   }
 
-  #iss-info {
-    font-size: 1.3em;
+  #iss-info,
+  input[type="button"],
+  .options-menu {
+    font-size: 1.4em;
   }
 
-  .options-menu {
-    font-size: 1.0em;
+  footer {
+    font-size: 1em;
   }
+
 }
