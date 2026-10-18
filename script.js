@@ -14,9 +14,8 @@ class MyGlobe {
     this.container = container;
     this.globe = Globe()(container)
       .globeImageUrl(globalImageTextMap,) // texture map for globe
-      // add a dark grey color to the globe to provide for the option of removing the texture map
-      .globeMaterial(new THREE.MeshBasicMaterial({ color: 0x323a45 })) // NASA dark grey color
-      .showGraticules(true); // lat/long graticules
+      .showGraticules(true) // lat/long graticules
+      .showAtmosphere(true); // add atmosphere for now
 
     // Set initial size and add a resize observer to handle window resizing
     this.resize();
