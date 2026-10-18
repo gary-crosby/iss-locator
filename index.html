@@ -4,18 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>International Space Station (ISS) Locator</title>
-    <!-- TODO add bootstrap? -->
-    <!-- Link to globe.gl library -->
+    <!-- Link to Orbitron font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Space+Mono&display=swap"
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Link to globe.gl library -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/6/w3.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
@@ -25,16 +22,17 @@
     <!-- I created this International Space Station (ISS) Locator web app to fulfill the
       requirements of an assignment for SHU's MSc Computer Science 'Web Technologies' module -->
 
-    <div class="container">
+    <div class="w3-container">
       <header>
         <!-- Not sure if this is needed -->
       </header>
 
-      <main id="globe-container">
-        <h1 class="text-center">International Space Station (ISS) Locator</h1>
-        <p >
+      <main>
+        <h1>International Space Station (ISS) Locator</h1>
+        <p>
           This web app displays the current position of the International Space
-          Station (ISS) realtive to the earth. The ISS's position is automagically updated every 10 seconds.
+          Station (ISS) relative to the earth. The ISS's position is
+          automagically updated every 10 seconds.
         </p>
         <div id="globe"></div>
       </main>

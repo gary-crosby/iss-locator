@@ -1,40 +1,79 @@
 // Script for Gary Crosby's ISS Locator web app
-//
-// Additional notes at the bottom of this file
+// See additional notes at the bottom of this file
+
+// Set a base altitude for the globe's point of view
+const BASE_ALTITUDE = 2;
 
 // Represents the globe and its properties
-//
-// TODO:
-//  - Use a different technique to mark ISS positon so updatePosition() is smoother
-//
-// Point data is added on updatePosition() method
 class MyGlobe {
   constructor(containerId, lat, lng) {
-    this.globe = Globe()(document.getElementById(containerId))
+    const container = document.getElementById(containerId);
+    this.container = container;
+    this.globe = Globe()(container)
       .globeImageUrl(
         "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg",
-      )
-      .showGraticules(true);
-    // Centre the view on the ISS
-    this.globe.pointOfView({ lat, lng, altitude: 2 }, 1000);
-    // Disable autorotation of the globe, but keep dragging is still enabled
+      ) // texture map for globe
+      .showGraticules(true); // lat/long graticules
+
+    // Set initial size and add a resize observer to handle window resizing
+    this.resize();
+    // Use ResizeObserver to handle resizing of the globe when the container size changes
+    new ResizeObserver(() => this.resize()).observe(container);
+    // Rotate globe to put the latitude and longitude at the centre
+    this.globe.pointOfView({ lat, lng, altitude: this.fitAltitude() }, 1000);
+    // Disable user interaction with the globe
     this.globe.controls().autoRotate = false;
-    // Keep using from dragging the globe
+    // Disable user interaction with the globe
     this.globe.controls().enableRotate = false;
+    // Point data is added on call of updatePosition() method
   }
 
-  // Method to move globe so lat-long is centered and add ISS location marker
+  // Zoom out when the canvas is narrower than tall so the whole globe stays visible
+  fitAltitude() {
+    const { clientWidth: w, clientHeight: h } = this.container;
+    return BASE_ALTITUDE / Math.min(1, w / h);
+  }
+
+  // Resize the globe to fit the container and adjust the point of view
+  resize() {
+    const { clientWidth: w, clientHeight: h } = this.container;
+    this.globe.width(w).height(h);
+    const { lat, lng } = this.globe.pointOfView();
+    this.globe.pointOfView({ lat, lng, altitude: this.fitAltitude() });
+  }
+
+  // Update the position of the ISS on the globe
   updatePosition(lat, lng) {
     this.globe.pointsData([{ lat, lng, size: 1, color: "red" }]);
     this.globe.pointColor("color");
     this.globe.pointAltitude(0.02);
     this.globe.pointRadius("size");
-    this.globe.pointOfView({ lat, lng }, 1000);
+    this.globe.pointOfView({ lat, lng, altitude: this.fitAltitude() }, 1000);
+  }
+
+  // Turn the graticule on or off
+  toggleGraticales() {
+    const currentState = this.globe.showGraticules();
+    this.globe.showGraticules(!currentState);
+  }
+
+  // Turn the globe texture map on or off
+  toggleGlobalImage() {
+    const currentState = this.globe.globeImageUrl();
+    if (currentState) {
+      this.globe.globeImageUrl(null);
+    } else {
+      this.globe.globeImageUrl(
+        "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg",
+      );
+    }
   }
 }
 
 // Async Function to fetch ISS position from WhereTheISS.at API
 // Returns a promise that resolves to an object with latitude and longitude properties.
+// We don't do anything with the promise because we update the globe directly in this function.
+// We return the full data object for potential future use.
 async function updateISSPosition() {
   const apiURL = "https://api.wheretheiss.at/v1/satellites/25544"; // 25544 is the NORAD ID for the ISS
 
@@ -47,6 +86,7 @@ async function updateISSPosition() {
     const data = await response.json();
     // Extract latitude and longitude
     const { latitude, longitude, altitude, velocity } = data;
+    // TODO: Update the UI with the ISS position data
     console.log(`Current ISS Position:`);
     console.log(`Latitude: ${latitude}`);
     console.log(`Longitude: ${longitude}`);
@@ -55,21 +95,17 @@ async function updateISSPosition() {
     myGlobe.updatePosition(latitude, longitude); // Update globe with new ISS position
     return data; // Return full data even though we don't need it all
   } catch (error) {
-    // TODO: Need to show a message to the user
+    // TODO: Need to fail gracefully to the user
     console.error(`Failed to fetch ISS position: ${error.message}`);
   }
 }
 
-/* TODO: (not mandatory) Use latitude and longitude to get name of country, ocean, or whatever at that location. 
-    - Need to find an API that does this for free */
-
-//
-
-// Create a new instance of the MyGlobe class without ISS position
-const myGlobe = new MyGlobe("globe", 52.15, -106.65);
-updateISSPosition(); // Initial call to update ISS position
-// Update ISS position every 5 seconds
-setInterval(updateISSPosition, 5000);
+// Create an instance of the MyGlobe class without ISS position
+const myGlobe = new MyGlobe("globe", 0, 0);
+// Set initial position of the ISS
+updateISSPosition();
+// Update the ISS position and rotate the globe every 10 seconds
+setInterval(updateISSPosition, 10000);
 
 /*  Notes:
 
@@ -81,7 +117,7 @@ setInterval(updateISSPosition, 5000);
 
     WhereTheISS.at API is limited to 1 request per second to a max of 1000 requests per day.
     If you exceed this limit, you will get a 429 error code.
-    It may take up to 5 seconds to fulfill a request.
+    It may take up to 5 seconds to fulfill a request so, to be safe, we'll update very 10 seconds
     
      Sample JSON response from WhereTheISS.at API:
 
