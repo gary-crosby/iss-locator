@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>International Space Station Locator</title>
+    <title>International Space Station Tracker</title>
     <!-- Link to Orbitron font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,7 +20,7 @@
   </head>
 
   <body>
-    <!-- I created this International Space Station (ISS) Locator web app to fulfill the
+    <!-- I created this International Space Station (ISS) Tracker web app to fulfill the
       requirements of an assignment for SHU's MSc Computer Science 'Web Technologies' module -->
     <div class="w3-container">
       <header>
@@ -28,22 +28,30 @@
       </header>
 
       <main>
-        <h1>International Space Station Locator</h1>
+        <h1>International Space Station Tracker</h1>
         <div id="globe"></div>
-        <table id="iss-info" class="w3-table w3-bordered w3-centered">
+        <table id="iss-info" >
           <tr>
-            <th>Latitude (degrees)</th>
-            <th>Longitude (degrees)</th>
-            <th>Altitude (km)</th>
-            <th>Speed (km/h)</th>
+            <th>Latitude: </th>
+            <td id="iss-lat">Loading...</td>
           </tr>
           <tr>
-            <td id="iss-lat">Loading...</td>
+            <th>Longitude: </th>
             <td id="iss-lng">Loading...</td>
+          </tr>
+          <tr>
+            <th>Altitude: </th>
             <td id="iss-alt">Loading...</td>
+          </tr>
+          <tr>
+            <th>Speed: </th>
             <td id="iss-speed">Loading...</td>
-          </tr> 
-          </table>
+          </tr>
+          <tr>
+            <th>Last updated: </th>
+            <td id="iss-time">Loading...</td>
+          </tr>
+        </table>
       </main>
 
       <footer>
