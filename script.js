@@ -102,14 +102,14 @@ async function updateISSPosition() {
     // For more user-friendly display, format the latitude and longitude with N/S and E/W indicators
     // instead of using "-" for south and west.
     let tempText = "";
-    tempText = latitude.toFixed(2) + "°";
+    tempText = Math.abs(latitude.toFixed(2)) + "°";
     if (latitude > 0) {
       tempText += " N";
     } else if (latitude < 0) {
       tempText += " S";
     }
     document.getElementById("iss-lat").textContent = tempText;
-    tempText = longitude.toFixed(2) + "°";
+    tempText = Math.abs(longitude.toFixed(2)) + "°";
     if (longitude > 0) {
       tempText += " E";
     } else if (longitude < 0) {

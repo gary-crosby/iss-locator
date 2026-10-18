@@ -27,30 +27,35 @@
       </header>
 
       <main>
-        <h1>International Space Station Tracker</h1>
+        <h1>International Space Station (ISS) Tracker</h1>
         <div id="globe"></div>
-        <table id="iss-info">
+        <div id="iss-info">
+        <table title="Current Position of the ISS">
           <tr>
-            <th>Latitude:&nbsp;</th>
-            <td id="iss-lat">Updating...</td>
+            <th colspan="2">Current Position of ISS</th>  
+            </tr>
+          <tr>
+            <td>Latitude:&nbsp;</td>
+            <td class="iss-stat" id="iss-lat">Updating...</td>
           </tr>
           <tr>
-            <th>Longitude:&nbsp;</th>
-            <td id="iss-lng">Updating...</td>
+            <td>Longitude:&nbsp;</td>
+            <td class="iss-stat" id="iss-lng">Updating...</td>
           </tr>
           <tr>
-            <th>Altitude:&nbsp;</th>
-            <td id="iss-alt">Updating...</td>
+            <td>Altitude:&nbsp;</td>
+            <td class="iss-stat" id="iss-alt">Updating...</td>
           </tr>
           <tr>
-            <th>Speed:&nbsp;</th>
-            <td id="iss-speed">Updating...</td>
+            <td>Speed:&nbsp;</td>
+            <td class="iss-stat" id="iss-speed">Updating...</td>
           </tr>
           <tr>
-            <th>Last updated:&nbsp;</th>
-            <td id="iss-time">Updating...</td>
+            <td>Last updated:&nbsp;</td>
+            <td class="iss-stat" id="iss-time">Updating...</td>
           </tr>
         </table>
+        </div>
       </main>
 
       <footer>
