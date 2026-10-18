@@ -14,8 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
     <!-- Link to custom styles and scripts -->
     <link rel="stylesheet" href="style.css" />
-    <!-- Link to main script. Defer running it until the page is loaded.-->
-    <script src="script.js" defer></script>
+    <!-- Link to main script as amodule because it contains an import. Modules are deferred automatically.-->
+    <script src="script.js" type="module"></script>
   </head>
 
   <body>
@@ -23,44 +23,53 @@
       requirements of an assignment for SHU's MSc Computer Science 'Web Technologies' module -->
     <div class="w3-container">
       <header>
-        <p>Options</p>
+        <details class="options-menu">
+          <summary>Options</summary>
+          <ul>
+            <li><label><input type="checkbox" id="opt-atmo" checked> Atmosphere</label></li>
+            <li><label><input type="checkbox" id="opt-graticules" checked> Lat-Long Lines</label></li>
+            <li><label><input type="checkbox" id="opt-dets" checked> Details</label></li>
+            <li><label><input type="checkbox" id="opt-title" checked> Title</label></li>
+            <li><label><input type="checkbox" id="opt-auto-update" checked> Auto update (10 S interval)</label></li>
+
+          </ul>
+        </details>
       </header>
 
       <main>
         <h1 id="main-title">International Space Station (ISS) Tracker</h1>
         <div id="globe"></div>
         <div id="iss-info">
-        <table title="Current Position of the ISS">
-          <tr>
-            <th colspan="2">Current Position of ISS</th>  
+          <table title="Current Position of the ISS">
+            <tr>
+              <th colspan="2">Current Position of ISS</th>
             </tr>
-          <tr>
-            <td>Latitude:&nbsp;</td>
-            <td class="iss-stat" id="iss-lat">Updating...</td>
-          </tr>
-          <tr>
-            <td>Longitude:&nbsp;</td>
-            <td class="iss-stat" id="iss-lng">Updating...</td>
-          </tr>
-          <tr>
-            <td>Altitude:&nbsp;</td>
-            <td class="iss-stat" id="iss-alt">Updating...</td>
-          </tr>
-          <tr>
-            <td>Speed:&nbsp;</td>
-            <td class="iss-stat" id="iss-speed">Updating...</td>
-          </tr>
-          <tr>
-            <td>Last updated:&nbsp;</td>
-            <td class="iss-stat" id="iss-time">Updating...</td>
-          </tr>
-        </table>
+            <tr>
+              <td>Latitude:&nbsp;</td>
+              <td class="iss-stat" id="iss-lat">Updating...</td>
+            </tr>
+            <tr>
+              <td>Longitude:&nbsp;</td>
+              <td class="iss-stat" id="iss-lng">Updating...</td>
+            </tr>
+            <tr>
+              <td>Altitude:&nbsp;</td>
+              <td class="iss-stat" id="iss-alt">Updating...</td>
+            </tr>
+            <tr>
+              <td>Speed:&nbsp;</td>
+              <td class="iss-stat" id="iss-speed">Updating...</td>
+            </tr>
+            <tr>
+              <td>Last updated:&nbsp;</td>
+              <td class="iss-stat" id="iss-time">Updating...</td>
+            </tr>
+          </table>
         </div>
       </main>
 
       <footer>
-        <!-- TODO: Put copyright info here? -->
-         <p id="about">About this web app</p>
+        <p id="about">About this web app</p>
       </footer>
     </div>
 

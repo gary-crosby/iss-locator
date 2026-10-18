@@ -2,10 +2,23 @@
 
 // See additional notes at the bottom of this file
 
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js";
+
 // Set a base altitude for the globe's point of view
 const BASE_ALTITUDE = 2;
 // Points to the texture map of the earth used for the globe. This is a free texture map from the three-globe library.
-const globalImageTextMap = "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
+const globalImageTextMap =
+  "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
+
+// Event handlers for UI controls.  Must use event handlers here because
+// index.html cannot call methods of the MyGlobe class directly because this JS
+// file is loaded as a module and the MyGlobe class is not in the global scope. 
+// The event handlers are defined here so they can access the myGlobe instance.
+document.getElementById("opt-atmo").addEventListener("change", () => myGlobe.toggleAtmo());
+document.getElementById("opt-graticules").addEventListener("change", () => myGlobe.toggleGraticales());
+document.getElementById("opt-dets").addEventListener("change", () => myGlobe.toggleDetails());
+document.getElementById("opt-title").addEventListener("change", () => myGlobe.toggleTitle());
+document.getElementById("opt-auto-update").addEventListener("change", () => myGlobe.toggleAutoUpdate());
 
 // Represents the globe and its properties
 class MyGlobe {
@@ -13,7 +26,7 @@ class MyGlobe {
     const container = document.getElementById(containerId);
     this.container = container;
     this.globe = Globe()(container)
-      .globeImageUrl(globalImageTextMap,) // texture map for globe
+      .globeImageUrl(globalImageTextMap) // texture map for globe
       .showGraticules(true) // lat/long graticules
       .showAtmosphere(true); // add atmosphere for now
 
@@ -59,17 +72,39 @@ class MyGlobe {
     this.globe.showGraticules(!currentState);
   }
 
-  // Turn the globe texture map on or off
-  toggleGlobalImage() {
-    const currentState = this.globe.globeImageUrl();
-    if (currentState) {
-      this.globe.globeImageUrl(null);
-    } else {
-      this.globe.globeImageUrl(
-        "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg",
-      );
-    }
+  // Turn the atmosphere on or off
+  toggleAtmo() {
+    const currentState = this.globe.showAtmosphere();
+    this.globe.showAtmosphere(!currentState);
   }
+
+// Toggle ISS position details on or off.  
+  toggleDetails() {
+    const details = document.getElementById("iss-info");
+    if (details.style.display === "none") {
+      details.style.display = "block";
+    } else {
+      details.style.display = "none";
+    }   
+  }
+
+  // Toggle page title (i.e., Heading 1)s on or off.  This is a placeholder for future functionality.
+  toggleTitle() {
+    const checkTitle = document.getElementById("opt-title");
+    const pageTitle = document.getElementById("main-title");
+    if (checkTitle.checked) {
+      pageTitle.style.display = "block";
+    } else {
+      pageTitle.style.display = "none";
+    }   
+  }
+
+  toggleAutoUpdate() {
+    const checkAutoUpdate = document.getElementById("opt-auto-update");     
+
+  
+  }
+
 }
 
 // Async Function to fetch ISS position from WhereTheISS.at API
@@ -78,7 +113,7 @@ class MyGlobe {
 // We return the full data object for potential future use.
 async function updateISSPosition() {
   const apiURL = "https://api.wheretheiss.at/v1/satellites/25544"; // 25544 is the NORAD ID for the ISS
-  let updateText = "Updating..."; 
+  let updateText = "Updating...";
   document.getElementById("iss-lat").textContent = updateText;
   document.getElementById("iss-lng").textContent = updateText;
   document.getElementById("iss-alt").textContent = updateText;
@@ -121,9 +156,11 @@ async function updateISSPosition() {
     } else if (longitude < 0) {
       tempText += " W";
     }
-    document.getElementById("iss-lng").textContent = tempText
-    document.getElementById("iss-alt").textContent = altitude.toFixed(1) + " km";
-    document.getElementById("iss-speed").textContent = velocity.toFixed(0) + " km/h";
+    document.getElementById("iss-lng").textContent = tempText;
+    document.getElementById("iss-alt").textContent =
+      altitude.toFixed(1) + " km";
+    document.getElementById("iss-speed").textContent =
+      velocity.toFixed(0) + " km/h";
     myGlobe.updatePosition(latitude, longitude); // Update globe with new ISS position
     return data; // Return full data even though we don't need it all
   } catch (error) {

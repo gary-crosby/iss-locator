@@ -110,6 +110,34 @@ header {
   color: #ffffff;
 }
 
+.options-menu {
+  position: relative;
+  display: inline-block;
+  text-align: left;
+}
+
+.options-menu summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.options-menu ul {
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  margin: 0.5em 0 0;
+  padding: 0.5em 1em;
+  list-style: none;
+  white-space: nowrap;
+  background-color: #1a1a1a;
+  border: 1px solid #555555;
+  border-radius: 4px;
+}
+
+.options-menu li {
+  padding: 0.25em 0;
+}
+
 /* Chnage font sizes for different screen sizes */
 @media (max-width: 480px) {
   h1 {
