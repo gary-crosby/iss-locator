@@ -12,8 +12,17 @@ body {
 body, h1, h2, h3, h4, h5, h6, p {
     font-family: "Orbitron", Arial, Helvetica, sans-serif;
     color: #ffffff;
+    
 }
 
+p {
+    letter-spacing: 0.15em; /* increase spacing between <p> letters even more to improve readability */
+}
+
+
+h1 {
+    text-align: center;
+}
 .w3-container {
   display: flex;
   flex-direction: column;
