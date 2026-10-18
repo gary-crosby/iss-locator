@@ -12,10 +12,11 @@
     <!-- Link to globe.gl library -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/6/w3.css" />
     <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
-    <!-- Link to styles and scripts -->
+    <!-- Link to custom styles and scripts -->
     <link rel="stylesheet" href="style.css" />
-    <!-- Link to main script but don't execute it until the page is loaded completely -->
-    <script src="script.js" defer></script>
+    <!-- Link to main script. Must identify it as a module because it includes
+     an import. js module is automatically deferred.-->
+    <script type="module" src="script.js"></script>
   </head>
 
   <body>
@@ -23,7 +24,7 @@
       requirements of an assignment for SHU's MSc Computer Science 'Web Technologies' module -->
     <div class="w3-container">
       <header>
-        <!-- Not sure if this is needed -->
+        <p>Options</p>
       </header>
 
       <main>
@@ -60,6 +61,7 @@
 
       <footer>
         <!-- TODO: Put copyright info here? -->
+         <p>About this web app</p>
       </footer>
     </div>
 

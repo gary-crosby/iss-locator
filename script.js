@@ -1,8 +1,11 @@
 // Script for Gary Crosby's ISS Locator web app
 // See additional notes at the bottom of this file
 
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
+
 // Set a base altitude for the globe's point of view
 const BASE_ALTITUDE = 2;
+const globalImageTextMap = "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"; // texture map for globe
 
 // Represents the globe and its properties
 class MyGlobe {
@@ -10,9 +13,9 @@ class MyGlobe {
     const container = document.getElementById(containerId);
     this.container = container;
     this.globe = Globe()(container)
-      .globeImageUrl(
-        "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg",
-      ) // texture map for globe
+      .globeImageUrl(globalImageTextMap,) // texture map for globe
+      // add a dark grey color to the globe to provide for the option of removing the texture map
+      .globeMaterial(new THREE.MeshBasicMaterial({ color: 0x323a45 })) // NASA dark grey color
       .showGraticules(true); // lat/long graticules
 
     // Set initial size and add a resize observer to handle window resizing

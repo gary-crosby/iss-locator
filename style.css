@@ -26,6 +26,10 @@ td {
   color: #ffffff;
 }
 
+h1 {
+  font-weight: 600;
+}
+
 th,
 td {
   padding-top: 0px;
@@ -92,6 +96,21 @@ h1 {
   min-width: 0;
   display: flex;
   flex-direction: column;
+}
+
+footer {
+  text-align: right;
+  padding: 1em;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+
+header {
+  text-align: right;
+  padding: 1em;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 /* Chnage font sizes for different screen sizes */
