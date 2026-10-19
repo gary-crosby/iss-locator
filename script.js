@@ -31,12 +31,19 @@ document
   .addEventListener("change", () => myGlobe.toggleAutoUpdate());
 document
   .getElementById("btn-update")
-  .addEventListener("click", () => updateISSPosition());
+  .addEventListener("click", () => doManualUpdate());
+
+document
+  .getElementById("options-heading")
+  .addEventListener("click", () => closeAbout());
+
+document
+  .getElementById("about-heading")
+  .addEventListener("click", () => closeOptions());
 
 // Represents the globe and its properties
 class MyGlobe {
   constructor(containerId, lat, lng) {
-
     const container = document.getElementById(containerId);
     this.container = container;
     this.globe = Globe()(container)
@@ -126,6 +133,26 @@ class MyGlobe {
       document.getElementById("man-update").style.display = "block";
     }
   }
+}
+
+function closeAbout() {
+  const aboutMenu = document.querySelector(".about-menu");
+  if (aboutMenu.hasAttribute("open")) {
+    aboutMenu.removeAttribute("open");
+  }
+}
+
+function closeOptions() {
+  const optionsMenu = document.querySelector(".options-menu");
+  if (optionsMenu.hasAttribute("open")) {
+    optionsMenu.removeAttribute("open");
+  }
+}
+
+function doManualUpdate() {
+  updateISSPosition();
+  closeOptions();
+  closeAbout();
 }
 
 // Async Function to fetch ISS position from WhereTheISS.at API

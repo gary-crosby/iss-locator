@@ -63,6 +63,11 @@ td {
   margin: 0 auto;
 }
 
+a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
 
 .container {
   display: flex;
@@ -96,6 +101,12 @@ td {
   /* removes the inline baseline gap */
 }
 
+#man-update {
+  margin: 0 auto;
+  margin-bottom: 3em;
+}
+
+
 .container main {
   flex: 1 1 0;
   min-height: 0;
@@ -105,7 +116,7 @@ td {
 }
 
 footer {
-  text-align: left;
+  text-align: center;
   padding: 1em;
   background-color: #000000;
   color: #ffffff;
@@ -168,6 +179,26 @@ header {
 
 .menu-panel p {
   margin: 0.5em 0;
+}
+
+input[type="button"] {
+  font-family: "Space Grotesk", Helvetica, sans-serif;
+  color: #ffffff;
+  background-color: #1a1a1a;
+  border: 1px solid #555555;
+  border-radius: 4px;
+  padding: 0.25em 0.9em;
+  cursor: pointer;
+}
+
+input[type="button"]:hover,
+input[type="button"]:focus-visible {
+  background-color: #333333;
+  border-color: #ffffff;
+}
+
+input[type="button"]:active {
+  background-color: #000000;
 }
 
 /* Change font sizes for different screen sizes */
