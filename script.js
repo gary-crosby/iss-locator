@@ -193,14 +193,13 @@ async function updateISSPosition() {
   document.getElementById("iss-speed").textContent = updateText;
   try {
     const response = await fetch(apiURL);
+
     // Check if the response is OK
     if (!response.ok) {
       console.log(`HTTP error! Status: ${response.status}`);
       crashGracefully();
       throw new Error(`HTTP error! Status: ${response.status}`);
-      
     }
-    console.log(`HTTP Status: ${response.status}`);
     const data = await response.json();
     // Extract latitude and longitude
     const { latitude, longitude, altitude, velocity } = data;
@@ -241,8 +240,13 @@ async function updateISSPosition() {
     myGlobe.updatePosition(latitude, longitude); // Update globe with new ISS position
     return data; // Return full data even though we don't need it all
   } catch (error) {
-    // TODO: Need to fail gracefully to the user
     console.error(`Failed to fetch ISS position: ${error.message}`);
+    const msg = document.getElementById("error-message");
+    if (!navigator.onLine || error instanceof TypeError) {
+      msg.textContent =
+        "There is no internet connection. Please check your network connection and reload the page.";
+    }
+    crashGracefully();
   }
 }
 
