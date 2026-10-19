@@ -1,4 +1,4 @@
-# International Space Station (ISS) Locator web app
+# International Space Station (ISS) Tracker app
 
 ## Background
 
