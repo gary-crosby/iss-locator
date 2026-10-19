@@ -25,10 +25,10 @@
         <details class="options-menu">
           <summary id="options-heading">Options</summary>
           <ul>
+            <li><label><input type="checkbox" id="opt-title" checked> Title text "International ..."</label></li>
             <li><label><input type="checkbox" id="opt-atmo" checked> Atmosphere</label></li>
             <li><label><input type="checkbox" id="opt-graticules" checked> Latitude & longtitude lines</label></li>
             <li><label><input type="checkbox" id="opt-dets" checked> ISS position details</label></li>
-            <li><label><input type="checkbox" id="opt-title" checked> Title text</label></li>
             <li><label><input type="checkbox" id="opt-auto-update" checked> Auto update (10 second interval)</label>
             </li>
           </ul>
@@ -48,7 +48,7 @@
         <h1 id="main-title">International Space Station (ISS) Tracker</h1>
 
         <div id="globe"></div>
-        
+
         <div id="man-update" style="display:none;">
           <input type="button" id="btn-update" value="Update Now" />
 
@@ -81,11 +81,13 @@
           </table>
         </div>
         <div id="error-message" style="display:none;">
-          <p>Sorry, there was a problem retrieving the ISS position data. Please check your internet connection and reload the application.</p></div>
+          <p>Sorry, there was a problem retrieving the ISS position data. Please check your internet connection and
+            reload the application.</p>
+        </div>
       </main>
 
       <footer>
-        <p>If you like space exploration, check out my other projects <a
+        <p>If you're interested in space, check out my other space-related projects: <a
             href="https://gary-crosby.github.io/shu_web_tech/w5_d5.4.html" target="_blank"
             rel="noopener noreferrer">Solar System Explorer</a> and (not mobile friendly) <a
             href="https://gary-crosby.github.io/p5js-game-demo-asteroid-alert/" target="_blank"

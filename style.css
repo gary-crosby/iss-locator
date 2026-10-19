@@ -64,10 +64,20 @@ td {
 }
 
 a {
-  color: #ffffff;
+  color: #BFDFFF;
   text-decoration: underline;
 }
 
+a:hover,
+#options-heading:hover,
+#about-heading:hover {
+  font-weight: bold;
+}
+
+#options-heading,
+#about-heading {
+  color: #BFDFFF;
+}
 
 .container {
   display: flex;
@@ -169,6 +179,10 @@ header {
   white-space: nowrap;
 }
 
+.options-menu input[type="checkbox"] {
+  accent-color: #BFDFFF;
+}
+
 /* Anchor the About panel to the right edge so it doesn't run off-screen */
 .about-menu .menu-panel {
   left: auto;
@@ -183,9 +197,10 @@ header {
 
 input[type="button"] {
   font-family: "Space Grotesk", Helvetica, sans-serif;
-  color: #ffffff;
-  background-color: #1a1a1a;
-  border: 1px solid #555555;
+  color: #BFDFFF;
+  /* ice blue */
+  background-color: #020411;
+  border: 1px solid #BFDFFF;
   border-radius: 4px;
   padding: 0.25em 0.9em;
   cursor: pointer;
@@ -193,8 +208,9 @@ input[type="button"] {
 
 input[type="button"]:hover,
 input[type="button"]:focus-visible {
-  background-color: #333333;
-  border-color: #ffffff;
+  background-color: #091c3f;
+  border-color: #BFDFFF;
+  font-weight: bold;
 }
 
 input[type="button"]:active {
@@ -215,7 +231,9 @@ input[type="button"]:active {
 
 /* Change font sizes for different screen sizes */
 @media (max-width: 480px) {
-  h1, #error-message {
+
+  h1,
+  #error-message {
     font-size: 1.1em;
   }
 
@@ -240,7 +258,8 @@ input[type="button"]:active {
 
 @media (min-width: 481px) and (max-width: 800px) {
 
-  h1, #error-message {
+  h1,
+  #error-message {
     font-size: 1.8em;
   }
 
@@ -266,7 +285,8 @@ input[type="button"]:active {
 
 @media (min-width: 801px) {
 
-  h1, #error-message {
+  h1,
+  #error-message {
     font-size: 2.3em;
   }
 
