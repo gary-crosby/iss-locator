@@ -195,8 +195,12 @@ async function updateISSPosition() {
     const response = await fetch(apiURL);
     // Check if the response is OK
     if (!response.ok) {
+      console.log(`HTTP error! Status: ${response.status}`);
+      crashGracefully();
       throw new Error(`HTTP error! Status: ${response.status}`);
+      
     }
+    console.log(`HTTP Status: ${response.status}`);
     const data = await response.json();
     // Extract latitude and longitude
     const { latitude, longitude, altitude, velocity } = data;
