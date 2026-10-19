@@ -31,11 +31,12 @@ document
   .addEventListener("change", () => myGlobe.toggleAutoUpdate());
 document
   .getElementById("btn-update")
-  .addEventListener("click", () => myGlobe.updatePosition());
+  .addEventListener("click", () => updateISSPosition());
 
 // Represents the globe and its properties
 class MyGlobe {
   constructor(containerId, lat, lng) {
+
     const container = document.getElementById(containerId);
     this.container = container;
     this.globe = Globe()(container)
