@@ -2,7 +2,7 @@
 
 // See additional notes at the bottom of this file
 
-// Import the Three.js library from a CDN.  
+// Import the Three.js library from a CDN.
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js";
 
 // Set a base altitude for the globe's point of view
@@ -12,7 +12,7 @@ const BASE_ALTITUDE = 2;
 const globalImageTextMap =
   "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
 
-// Event handlers for UI controls.  
+// Event handlers for UI controls.
 // index.html cannot call methods of the MyGlobe class directly because this JS
 // file is loaded as a module and, therefore, the MyGlobe class is not in the global scope.
 // The event handlers are defined here so they can access the myGlobe instance.
@@ -160,6 +160,24 @@ function run() {
   updateISSPosition();
   // Update the ISS position and rotate the globe every 10 seconds
   myGlobe.toggleAutoUpdate();
+}
+
+function crashGracefully() {
+  // Stop the auto-update interval if it exists
+  if (myGlobe.autoUpdateInterval) {
+    clearInterval(myGlobe.autoUpdateInterval);
+  }
+  // Close the options menu and about info box, if they are open
+  closeOptions();
+  closeAbout();
+  // Hide the manual update button, header, globe and ISS details
+  document.getElementById("man-update").style.display = "none";
+  document.querySelector("header").style.display = "none";
+  document.getElementById("globe").style.display = "none";
+  document.getElementById("iss-info").style.display = "none";
+  // Show the error message to the user
+  const errorMessage = document.getElementById("error-message");
+  errorMessage.style.display = "block";
 }
 
 // Async Function to fetch ISS position from WhereTheISS.at API
