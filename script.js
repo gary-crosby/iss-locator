@@ -2,17 +2,19 @@
 
 // See additional notes at the bottom of this file
 
+// Import the Three.js library from a CDN.  
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js";
 
 // Set a base altitude for the globe's point of view
 const BASE_ALTITUDE = 2;
+
 // Points to the texture map of the earth used for the globe. This is a free texture map from the three-globe library.
 const globalImageTextMap =
   "//unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
 
-// Event handlers for UI controls.  Must use event handlers here because
+// Event handlers for UI controls.  
 // index.html cannot call methods of the MyGlobe class directly because this JS
-// file is loaded as a module and the MyGlobe class is not in the global scope.
+// file is loaded as a module and, therefore, the MyGlobe class is not in the global scope.
 // The event handlers are defined here so they can access the myGlobe instance.
 document
   .getElementById("opt-atmo")
@@ -32,11 +34,9 @@ document
 document
   .getElementById("btn-update")
   .addEventListener("click", () => doManualUpdate());
-
 document
   .getElementById("options-heading")
   .addEventListener("click", () => closeAbout());
-
 document
   .getElementById("about-heading")
   .addEventListener("click", () => closeOptions());
@@ -155,6 +155,13 @@ function doManualUpdate() {
   closeAbout();
 }
 
+function run() {
+  // Update the ISS position and rotate the globe every 10 seconds
+  updateISSPosition();
+  // Update the ISS position and rotate the globe every 10 seconds
+  myGlobe.toggleAutoUpdate();
+}
+
 // Async Function to fetch ISS position from WhereTheISS.at API
 // Returns a promise that resolves to an object with latitude and longitude properties.
 // We don't do anything with the promise because we update the globe directly in this function.
@@ -217,34 +224,7 @@ async function updateISSPosition() {
   }
 }
 
-// Create an instance of the MyGlobe class without ISS position
-const myGlobe = new MyGlobe("globe", 0, 0);
-// Set initial position of the ISS
-updateISSPosition();
-// Update the ISS position and rotate the globe every 10 seconds
-myGlobe.toggleAutoUpdate();
-
-/*  Notes:
-
-    I originally got the ISS location from http://api.open-notify.org/iss-now.json 
-    but its is http not https so it will cause "mixed content" issues.
-    
-    I found a free API https://api.wheretheiss.at/v1/satellites/25544 
-    that returns the ISS location plus a few other properties such as velocity
-
-    WhereTheISS.at API is limited to 1 request per second to a max of 1000 requests per day.
-    If you exceed this limit, you will get a 429 error code.
-    It may take up to 5 seconds to fulfill a request so, to be safe, we'll update very 10 seconds
-    
-     Sample JSON response from WhereTheISS.at API:
-
-        {
-            "name": "iss",
-            "id": 25544,
-            "latitude": 51.6,
-            "longitude": -0.1,
-            "altitude": 420.5,
-            "velocity": 27600.0,
-            "visibility": "daylight"
-        }
-*/
+// Create an instance of the MyGlobe class without ISS position and execute
+// the remainder of the code to set up the globe and start the ISS position update loop.
+const myGlobe = new MyGlobe("globe", 0, 0); // (0, 0) is the intersection of the equator and prime meridian.
+run();
