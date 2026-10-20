@@ -24,10 +24,10 @@ document
   .addEventListener("change", () => myGlobe.toggleGraticules());
 document
   .getElementById("opt-dets")
-  .addEventListener("change", () => myGlobe.toggleDetails());
+  .addEventListener("change", () => toggleDetails());
 document
   .getElementById("opt-title")
-  .addEventListener("change", () => myGlobe.toggleTitle());
+  .addEventListener("change", () => toggleTitle());
 document
   .getElementById("opt-auto-update")
   .addEventListener("change", () => myGlobe.toggleAutoUpdate());
@@ -99,27 +99,6 @@ class MyGlobe {
     this.globe.showAtmosphere(!currentState);
   }
 
-  // Toggle ISS position details on or off.
-  toggleDetails() {
-    const details = document.getElementById("iss-info");
-    if (details.style.display === "none") {
-      details.style.display = "block";
-    } else {
-      details.style.display = "none";
-    }
-  }
-
-  // Toggle page title (i.e., Heading 1)s on or off.  This is a placeholder for future functionality.
-  toggleTitle() {
-    const checkTitle = document.getElementById("opt-title");
-    const pageTitle = document.getElementById("main-title");
-    if (checkTitle.checked) {
-      pageTitle.style.display = "block";
-    } else {
-      pageTitle.style.display = "none";
-    }
-  }
-
   toggleAutoUpdate() {
     const checkAutoUpdate = document.getElementById("opt-auto-update");
     if (checkAutoUpdate.checked) {
@@ -134,6 +113,27 @@ class MyGlobe {
     }
   }
 }
+
+function toggleDetails() {
+    const details = document.getElementById("iss-info");
+    if (details.style.display === "none") {
+      details.style.display = "block";
+    } else {
+      details.style.display = "none";
+    }
+  }
+
+  
+  // Toggle page title (i.e., Heading 1)s on or off.  This is a placeholder for future functionality.
+  function toggleTitle() {
+    const checkTitle = document.getElementById("opt-title");
+    const pageTitle = document.getElementById("main-title");
+    if (checkTitle.checked) {
+      pageTitle.style.display = "block";
+    } else {
+      pageTitle.style.display = "none";
+    }
+  }
 
 function closeAbout() {
   const aboutMenu = document.querySelector(".about-menu");
