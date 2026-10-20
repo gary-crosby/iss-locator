@@ -3,7 +3,11 @@
 // See additional notes at the bottom of this file
 
 // Import the Three.js library from a CDN.
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js";
+// import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js";
+
+// API URL for the WhereTheISS.at API to get the current position of the ISS. 
+// The NORAD ID for the ISS is 25544.
+const apiURL = "https://api.wheretheiss.at/v1/satellites/25544"; 
 
 // Set a base altitude for the globe's point of view
 const BASE_ALTITUDE = 2;
@@ -115,25 +119,24 @@ class MyGlobe {
 }
 
 function toggleDetails() {
-    const details = document.getElementById("iss-info");
-    if (details.style.display === "none") {
-      details.style.display = "block";
-    } else {
-      details.style.display = "none";
-    }
+  const details = document.getElementById("iss-info");
+  if (details.style.display === "none") {
+    details.style.display = "block";
+  } else {
+    details.style.display = "none";
   }
+}
 
-  
-  // Toggle page title (i.e., Heading 1)s on or off.  This is a placeholder for future functionality.
-  function toggleTitle() {
-    const checkTitle = document.getElementById("opt-title");
-    const pageTitle = document.getElementById("main-title");
-    if (checkTitle.checked) {
-      pageTitle.style.display = "block";
-    } else {
-      pageTitle.style.display = "none";
-    }
+// Toggle page title (i.e., Heading 1)s on or off.  This is a placeholder for future functionality.
+function toggleTitle() {
+  const checkTitle = document.getElementById("opt-title");
+  const pageTitle = document.getElementById("main-title");
+  if (checkTitle.checked) {
+    pageTitle.style.display = "block";
+  } else {
+    pageTitle.style.display = "none";
   }
+}
 
 function closeAbout() {
   const aboutMenu = document.querySelector(".about-menu");
@@ -173,6 +176,7 @@ function crashGracefully() {
   // Hide the manual update button, header, globe and ISS details
   document.getElementById("man-update").style.display = "none";
   document.querySelector("header").style.display = "none";
+  document.querySelector("footer").style.display = "none";
   document.getElementById("globe").style.display = "none";
   document.getElementById("iss-info").style.display = "none";
   // Show the error message to the user
@@ -185,69 +189,69 @@ function crashGracefully() {
 // We don't do anything with the promise because we update the globe directly in this function.
 // We return the full data object for potential future use.
 async function updateISSPosition() {
-  const apiURL = "https://api.wheretheiss.at/v1/satellites/25544"; // 25544 is the NORAD ID for the ISS
   let updateText = "Updating...";
   document.getElementById("iss-lat").textContent = updateText;
   document.getElementById("iss-lng").textContent = updateText;
   document.getElementById("iss-alt").textContent = updateText;
   document.getElementById("iss-speed").textContent = updateText;
+
+  let response;
   try {
-    const response = await fetch(apiURL);
-
-    // Check if the response is OK
-    if (!response.ok) {
-      console.log(`HTTP error! Status: ${response.status}`);
-      crashGracefully();
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    // Extract latitude and longitude
-    const { latitude, longitude, altitude, velocity } = data;
-    // Update the UI with the current local time
-    const now = new Date();
-    document.getElementById("iss-time").textContent = now.toLocaleTimeString(
-      [],
-      {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-      },
-    );
-
-    // Update the UI with the ISS position data
-    // For more user-friendly display, format the latitude and longitude with N/S and E/W indicators
-    // instead of using "-" for south and west.
-    let tempText = "";
-    tempText = Math.abs(latitude.toFixed(2)) + "°";
-    if (latitude > 0) {
-      tempText += " N";
-    } else if (latitude < 0) {
-      tempText += " S";
-    }
-    document.getElementById("iss-lat").textContent = tempText;
-    tempText = Math.abs(longitude.toFixed(2)) + "°";
-    if (longitude > 0) {
-      tempText += " E";
-    } else if (longitude < 0) {
-      tempText += " W";
-    }
-    document.getElementById("iss-lng").textContent = tempText;
-    document.getElementById("iss-alt").textContent =
-      altitude.toFixed(1) + " km";
-    document.getElementById("iss-speed").textContent =
-      velocity.toFixed(0) + " km/h";
-    myGlobe.updatePosition(latitude, longitude); // Update globe with new ISS position
-    return data; // Return full data even though we don't need it all
+    response = await fetch(apiURL);
   } catch (error) {
-    console.error(`Failed to fetch ISS position: ${error.message}`);
-    const msg = document.getElementById("error-message");
-    if (!navigator.onLine || error instanceof TypeError) {
-      msg.textContent =
-        "There is no internet connection. Please check your network connection and reload the page.";
-    }
+    const message = !navigator.onLine
+      ? "You appear to be offline. Check your internet connection and try again."
+      : "Could not reach the ISS data service. Check your connection and try again.";
+    document.getElementById("error-message").textContent = message;
     crashGracefully();
+    return;
   }
+  if (!response.ok) {
+    const message =
+      response.status === 404
+        ? "The ISS position data was not found (404). Try again later."
+        : `The ISS data service returned an error (${response.status}). Try again later.`;
+
+    document.getElementById("error-message").textContent = message;
+    crashGracefully();
+    return;
+  }
+
+  const data = await response.json();
+  // Extract latitude and longitude
+  const { latitude, longitude, altitude, velocity } = data;
+  // Update the UI with the current local time
+  const now = new Date();
+  document.getElementById("iss-time").textContent = now.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+
+  // Update the UI with the ISS position data
+  // For more user-friendly display, format the latitude and longitude with N/S and E/W indicators
+  // instead of using "-" for south and west.
+  let tempText = "";
+  tempText = Math.abs(latitude.toFixed(2)) + "°";
+  if (latitude > 0) {
+    tempText += " N";
+  } else if (latitude < 0) {
+    tempText += " S";
+  }
+  document.getElementById("iss-lat").textContent = tempText;
+  tempText = Math.abs(longitude.toFixed(2)) + "°";
+  if (longitude > 0) {
+    tempText += " E";
+  } else if (longitude < 0) {
+    tempText += " W";
+  }
+  document.getElementById("iss-lng").textContent = tempText;
+  document.getElementById("iss-alt").textContent = altitude.toFixed(1) + " km";
+  document.getElementById("iss-speed").textContent =
+    velocity.toFixed(0) + " km/h";
+  myGlobe.updatePosition(latitude, longitude); // Update globe with new ISS position
+  return data; // Return full data even though we don't need it all
 }
 
 // Create an instance of the MyGlobe class without ISS position and execute
